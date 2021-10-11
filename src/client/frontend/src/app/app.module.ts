@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
@@ -12,6 +13,8 @@ import { TareasPrivadasComponent } from './components/tareas-privadas/tareas-pri
 
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AltaMedicoDerivanteComponent } from './components/medico-derivante/alta-medico-derivante/alta-medico-derivante.component';
+import { MedicoDerivanteComponent } from './components/medico-derivante/medico-derivante.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     RegistrarComponent,
     IngresarComponent,
     TareasComponent,
-    TareasPrivadasComponent
+    TareasPrivadasComponent,
+    AltaMedicoDerivanteComponent,
+    MedicoDerivanteComponent
   ],
   imports: [
     BrowserModule,

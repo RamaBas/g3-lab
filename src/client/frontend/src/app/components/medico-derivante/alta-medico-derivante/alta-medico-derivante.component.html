@@ -1,0 +1,105 @@
+<h4><small> Crear nuevo Médico derivante</small></h4>
+<hr>
+<form autocomplete="off" (ngSubmit)="onSubmit(formMedicoDerivante)" #formMedicoDerivante="ngForm">
+
+  <div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               #name="ngModel"
+               [ngModel]="user.name"
+               [class.is-invalid]="name.invalid && name.touched"
+               name="name"
+               type="text"
+               placeholder="Nombre"
+               required
+               minlength="2"
+               >
+        <small
+          *ngIf="(name.invalid && name.touched)"
+          class="form-text text-danger">
+            El nombre es obligatorio
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               #surname="ngModel"
+               [ngModel]="user.surname"
+               [class.is-invalid]="surname.invalid && surname.touched"
+               name="surname"
+               type="text"
+               placeholder="Apellido"
+               required
+               >
+        <small
+          *ngIf="name.invalid && name.touched"
+          class="form-text text-danger">
+            Apellido es obligatorio y debe tener al menos 5 letras
+        </small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-8">
+
+      <input class="form-control"
+             #email="ngModel"
+             [ngModel]="user.email"
+             [class.is-invalid]="email.invalid && email.touched"
+             name="email"
+             type="email"
+             placeholder="Correo electrónico"
+             pattern="[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+             required
+             >
+      <small
+        *ngIf="name.invalid && name.touched"
+        class="form-text text-danger">
+          Email es obligatorio
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Teléfono</label>
+    <div class="col-8">
+
+      <input class="form-control"
+             #phone='ngModel'
+             [ngModel]="user.phone"
+             [class.is-invalid]="phone.invalid && phone.touched"
+             name="phone"
+             type="number"
+             placeholder="Teléfono"
+             required
+             >
+      <small
+        *ngIf="name.invalid && name.touched"
+        class="form-text text-danger">
+          Telefono es obligatorio
+      </small>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
