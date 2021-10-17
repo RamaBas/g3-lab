@@ -12,8 +12,6 @@ export class MedicoDerivanteService {
   constructor(private http:HttpClient, private router: Router) { }
 
   createMedicoDerivante(medicoDerivante : any){
-    console.log("Se va a crear un Medico Derivante");
-
     return this.http.post<any>(this.URL + '/alta-medico-derivante', medicoDerivante)
   }
 
