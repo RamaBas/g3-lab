@@ -11,8 +11,20 @@ export class MedicoDerivanteService {
 
   constructor(private http:HttpClient, private router: Router) { }
 
-  createMedicoDerivante(medicoDerivante : any){
+  createMedicoDerivante(medicoDerivante: any){
     return this.http.post<any>(this.URL + '/alta-medico-derivante', medicoDerivante)
+  }
+
+  deleteMedicoDerivante(medicoDerivante: any){
+    console.log("Deleteado")
+  }
+
+  updateMedicoDerivante(MedicoDerivante: any){
+    console.log("Updateado")
+  }
+
+  getMedicoDerivante(){
+    return this.http.get<any>(this.URL + '/obtener-medico-derivante')
   }
 
 }

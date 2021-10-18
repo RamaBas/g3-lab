@@ -136,18 +136,55 @@ router.get('/perfil', verifyToken, (req, res) => {
 router.get('/', (req, res) => res.send('Hola!'))
 
 
+router.get('/obtener-medico-derivante', async (req, res) => {
+    let medicosDerivantes = await MedicoDerivante.find({'status': true})
 
-router.post('/alta-medico-derivante', async (req, res) => {
-    const {name, surname, email, phone} = req.body;
-
-    const newMedicoDerivante = new MedicoDerivante({name, surname, email, phone});
-    await newMedicoDerivante.save();
-
-    res.status(200).json("OK")
+    res.status(200).json(medicosDerivantes)
 
 })
+// !TODO Create a function to validate data and use in every MedDerivantes service
+router.post('/alta-medico-derivante', async (req, res) => {
+    const {name, surname, email, phone} = req.body;
+    const newMedicoDerivante = new MedicoDerivante({name, surname, email, phone, status:true});
+    await newMedicoDerivante.save();
 
+    res.status(200).send("OK")
 
+})
+router.patch('/baja-medico-derivante', async (req, res) => {
+    const {id} = req.headers;
+    await MedicoDerivante.findById(id)
+    .then((medDerivante) => {
+        console.log(typeof medDerivante )
+        medDerivante.status = false;
+        medDerivante
+            .save()
+            .then(() => {
+             res.json({ medDerivante }); // return new status
+            })
+    })
+    .catch((err) => {
+        return res.status(401).send("El médico no existe");
+    });
+})
+
+router.patch('/editar-medico-derivante', async (req, res) => {
+    const {id} = req.headers;
+    await MedicoDerivante.findById(id)
+    .then((medDerivante) => {
+        let {name, surname, email, phone} = req.headers;
+        let newMedDerivante = {name, surname, email, phone}
+        medDerivante = Object.assign(medDerivante, newMedDerivante)
+        medDerivante
+            .save()
+            .then(() => {
+             res.json({ medDerivante }); // return new status
+            })
+    })
+    .catch((err) => {
+        return res.status(401).send("El médico no existe");
+    });
+})
 module.exports = router;
 
 function verifyToken(req, res, next){

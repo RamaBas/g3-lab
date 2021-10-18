@@ -5,7 +5,8 @@ const userSchema = new Schema({
     name     : String,
     surname  : String,
     email    : String,
-    phone    : Number
+    phone    : Number,
+    status   : Boolean
 });
 
 module.exports = model('MedicoDerivante', userSchema);
