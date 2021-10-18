@@ -146,9 +146,7 @@ router.get('/obtener-medico-derivante', async (req, res) => {
 router.post('/alta-medico-derivante', async (req, res) => {
     const {name, surname, email, phone} = req.body;
     const newMedicoDerivante = new MedicoDerivante({name, surname, email, phone, status:true});
-    await newMedicoDerivante.save();
-
-    res.status(200).send("OK")
+    await newMedicoDerivante.save().then(()=>res.status(200).send({status:"OK"}))    
 
 })
 router.patch('/baja-medico-derivante', async (req, res) => {

@@ -30,13 +30,12 @@ export class AltaMedicoDerivanteComponent implements OnInit {
 
 
   onSubmit( formMedicoDerivante: NgForm ){
-
     if(!formMedicoDerivante.invalid){
-      console.log("Submited! ", formMedicoDerivante.value)
       this.medicoDerivanteService.createMedicoDerivante(formMedicoDerivante.value).subscribe(res =>{
-        console.log(res);
-        this.router.navigate(['/tareas-privadas']);
+        console.log("joya, quedo así",res);
+        this.router.navigate(['/medicos-derivante']);
       })
+
     }else{
       Object.values(formMedicoDerivante.controls).forEach(control=> {
         control.markAsTouched();
