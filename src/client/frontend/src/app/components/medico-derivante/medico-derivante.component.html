@@ -1,1 +1,27 @@
-<p>medico-derivante works!</p>
+<h4>Médicos derivantes</h4>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Mail</th>
+      <th scope="col">Teléfono</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items | slice: fromItem:toItem ">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.surname}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.phone}}</td>
+    </tr>
+  </tbody>
+</table>
+<mat-paginator [length]="items.length"
+              [pageSize]="pageSize"
+              (page)="changePage($event)"
+              >
+</mat-paginator>

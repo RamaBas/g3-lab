@@ -6,6 +6,7 @@ import { TareasComponent } from './components/tareas/tareas.component';
 import { TareasPrivadasComponent } from './components/tareas-privadas/tareas-privadas.component';
 import { IngresarComponent } from './components/ingresar/ingresar.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
+import { MedicoDerivanteComponent } from './components/medico-derivante/medico-derivante.component';
 import { AltaMedicoDerivanteComponent } from './components/medico-derivante/alta-medico-derivante/alta-medico-derivante.component'
 
 import { AuthGuard } from './auth.guard';
@@ -22,13 +23,18 @@ const routes: Routes = [
     component: TareasComponent
   },
   {
-    path: 'alta-medico-derivante',
-    component: AltaMedicoDerivanteComponent,
+    path: 'tareas-privadas',
+    component: TareasPrivadasComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'tareas-privadas',
-    component: TareasPrivadasComponent,
+    path: 'medicos-derivante',
+    component: MedicoDerivanteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'alta-medicos-derivante',
+    component: AltaMedicoDerivanteComponent,
     canActivate: [AuthGuard]
   },
   {

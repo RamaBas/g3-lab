@@ -1,0 +1,32 @@
+const medicoDerivante = [
+  {
+    name:'Juan',
+    surname:'Ariste',
+    email:'JuanAriste@gmail.com',
+    phone:22223423
+  },
+  {
+    name:'Ariel',
+    surname:'Constantinopla',
+    email:'JuanAriste@gmail.com',
+    phone:22223423
+  },
+  {
+    name:'Javier',
+    surname:'Paz',
+    email:'JuanAriste@gmail.com',
+    phone:22223423
+  },
+  {
+    name:'Nicole',
+    surname:'Regazzati',
+    email:'JuanAriste@gmail.com',
+    phone:22223423
+  },
+  {
+    name:'Pino',
+    surname:'Solana',
+    email:'JuanAriste@gmail.com',
+    phone:22223423
+  },
+]
