@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MedicoDerivanteService } from 'src/app/services/medico-derivante.service';
 
 @Component({
@@ -12,35 +12,56 @@ import { MedicoDerivanteService } from 'src/app/services/medico-derivante.servic
 export class AltaMedicoDerivanteComponent implements OnInit {
 
 
-
+  editMode= false;
   //TODO : When entry by edit mode, get data of Medico Derivante and save in user
-  user={
+  user:any = {
     name:'',
     surname:'',
     email:'',
     phone:''
   }
+
   constructor(
     private medicoDerivanteService: MedicoDerivanteService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ){}
 
-  ngOnInit(): void {
+  getMedicosDerivantes = (id: string) => {
+    this.medicoDerivanteService.getMedicoDerivanteById(id)
+      .subscribe((resp) => resp.map((usr:any) => this.user = usr))
   }
 
+  backNavigate = () => {
+    this.router.navigate(['/medicos-derivante']);
+  }
 
   onSubmit( formMedicoDerivante: NgForm ){
+    console.log("Entry",this.editMode)
     if(!formMedicoDerivante.invalid){
-      this.medicoDerivanteService.createMedicoDerivante(formMedicoDerivante.value).subscribe(res =>{
-        console.log("joya, quedo así",res);
-        this.router.navigate(['/medicos-derivante']);
-      })
+      !this.editMode ?
+        this.medicoDerivanteService.createMedicoDerivante(formMedicoDerivante.value).subscribe(res =>{
+          this.backNavigate()
+        })
+        : this.medicoDerivanteService.updateMedicoDerivante({...formMedicoDerivante.value, '_id':this.user._id}).subscribe(res =>{
+            this.backNavigate()
+          })
 
     }else{
       Object.values(formMedicoDerivante.controls).forEach(control=> {
         control.markAsTouched();
       })
     }
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      if(params.get('id')){
+        this.editMode = true
+        let id:string = params.get('id') ? params.get('id')! : ''
+        this.getMedicosDerivantes(id)
+      }
+    });
   }
 
 }

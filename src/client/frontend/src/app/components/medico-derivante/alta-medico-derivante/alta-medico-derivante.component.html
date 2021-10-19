@@ -1,8 +1,21 @@
-<h4><small> Crear nuevo Médico derivante</small></h4>
+<h2>Alta de Médicos Derivantes</h2>
 <hr>
-<form autocomplete="off" (ngSubmit)="onSubmit(formMedicoDerivante)" #formMedicoDerivante="ngForm">
+<form autocomplete="off" (ngSubmit)="onSubmit(formMedicoDerivante)" #formMedicoDerivante="ngForm" class="col-md-12">
 
-  <div>
+    <div class="form-group row" *ngIf="editMode">
+      <label class="col-2 col-form-label">ID</label>
+      <div class="col-8">
+
+        <input class="form-control"
+              #_id="ngModel"
+              [ngModel]="user._id"
+              disabled
+              [class.is-invalid]="_id.invalid && _id.touched"
+              name="id"
+              type="text"
+              >
+      </div>
+    </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
@@ -46,8 +59,6 @@
         </small>
       </div>
     </div>
-
-  </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
@@ -94,11 +105,14 @@
 
 
   <div class="form-group row">
-    <label class="col-2 col-form-label">&nbsp;</label>
-    <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary btn-block">
+    <div class="input-group col-md-10 mt-2 d-flex justify-content-end">
+      <button class="btn btn-danger  col-3 mr-2" (click)="backNavigate()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-outline-primary  col-3 mt-0">
         Guardar
       </button>
+
     </div>
   </div>
 

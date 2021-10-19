@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'editar-medicos-derivante/:id',
+    component: AltaMedicoDerivanteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'ingresar',
     component: IngresarComponent
   },

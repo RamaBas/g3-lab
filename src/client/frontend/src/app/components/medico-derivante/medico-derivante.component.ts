@@ -18,7 +18,6 @@ export class MedicoDerivanteComponent implements OnInit {
 
 
   changePage(e:PageEvent){
-    console.log(e);
     this.fromItem = e.pageIndex * e.pageSize;
     this.toItem = this.fromItem + e.pageSize
   }
@@ -31,7 +30,17 @@ export class MedicoDerivanteComponent implements OnInit {
     this.medicoDerivanteService.getMedicoDerivante()
       .subscribe((resp) => this.items = resp)
   }
+  addMedicoDerivante = () => {
+    this.router.navigate(['/alta-medicos-derivante']);
+  }
+  editMedicoDerivante = (event:any, item:any) => {
+    this.router.navigate([`/editar-medicos-derivante/${item._id}`]);
+  }
+  deleteMedicoDerivante = (id:string) => {
+    let idMedico= {'_id': id}
+    this.medicoDerivanteService.deleteMedicoDerivante(idMedico).subscribe(() => this.getMedicosDerivantes())
 
+  }
   ngOnInit(): void {
     this.getMedicosDerivantes()
   }

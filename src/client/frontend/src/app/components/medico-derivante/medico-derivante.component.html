@@ -1,22 +1,27 @@
-<h4>Médicos derivantes</h4>
-
+<div class="header headerAndAdd">
+  <h2>Médicos Derivantes <small>Activos ({{items.length}})</small> </h2>
+  <button type="button" class="btn btn-success" (click)="addMedicoDerivante()"><img src="https://icongr.am/fontawesome/plus.svg?size=16&color=ffffff"/></button>
+</div>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Mail</th>
       <th scope="col">Teléfono</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of items | slice: fromItem:toItem ">
-      <th scope="row">{{item.id}}</th>
       <td>{{item.name}}</td>
       <td>{{item.surname}}</td>
       <td>{{item.email}}</td>
       <td>{{item.phone}}</td>
+      <td>
+        <button type="button" class="btn btn-warning btn-sm mr-1" (click)="editMedicoDerivante($event,item)"><img src="https://icongr.am/fontawesome/pencil.svg?size=16&color=ffffff"/></button>
+        <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteMedicoDerivante(item._id)"><img src="https://icongr.am/fontawesome/trash.svg?size=16&color=ffffff"/></button>
+      </td>
     </tr>
   </tbody>
 </table>

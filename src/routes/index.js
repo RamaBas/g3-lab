@@ -142,18 +142,25 @@ router.get('/obtener-medico-derivante', async (req, res) => {
     res.status(200).json(medicosDerivantes)
 
 })
+
+router.get('/obtener-medico-por-id', async (req, res) => {
+  const {id} = req.headers
+  let medicoDerivantes = await MedicoDerivante.find({'_id': id})
+  res.status(200).json(medicoDerivantes)
+
+})
 // !TODO Create a function to validate data and use in every MedDerivantes service
 router.post('/alta-medico-derivante', async (req, res) => {
-    const {name, surname, email, phone} = req.body;
-    const newMedicoDerivante = new MedicoDerivante({name, surname, email, phone, status:true});
+    const {name, surname, email, phone, _id} = req.body;
+    const newMedicoDerivante = new MedicoDerivante({name, surname, email, phone, _id, status:true});
     await newMedicoDerivante.save().then(()=>res.status(200).send({status:"OK"}))    
 
 })
+
 router.patch('/baja-medico-derivante', async (req, res) => {
-    const {id} = req.headers;
-    await MedicoDerivante.findById(id)
+    const {_id} = req.body;
+    await MedicoDerivante.findById(_id)
     .then((medDerivante) => {
-        console.log(typeof medDerivante )
         medDerivante.status = false;
         medDerivante
             .save()
@@ -167,12 +174,17 @@ router.patch('/baja-medico-derivante', async (req, res) => {
 })
 
 router.patch('/editar-medico-derivante', async (req, res) => {
-    const {id} = req.headers;
-    await MedicoDerivante.findById(id)
+    console.log(req.body)
+    const {_id} = req.body;
+    console.log("ID:_:",_id)
+    await MedicoDerivante.findById(_id)
     .then((medDerivante) => {
-        let {name, surname, email, phone} = req.headers;
-        let newMedDerivante = {name, surname, email, phone}
+        let {name, surname, email, phone} = req.body;
+        
+        let newMedDerivante = {_id, name, surname, email, phone, 'status':true}
+        console.log("newMedDerivante",newMedDerivante)
         medDerivante = Object.assign(medDerivante, newMedDerivante)
+        /* console.log("#####", medDerivante) */
         medDerivante
             .save()
             .then(() => {
@@ -183,6 +195,8 @@ router.patch('/editar-medico-derivante', async (req, res) => {
         return res.status(401).send("El médico no existe");
     });
 })
+
+
 module.exports = router;
 
 function verifyToken(req, res, next){
